@@ -218,7 +218,7 @@ public class DataUtilitiesTest{
     @Test(expected = Exception.class)
     public void testGetCumalitivePercentagesThrowsExceptionForValueZero() {
         KeyedValues result = DataUtilities.getCumulativePercentages(values3);
-        assertEquals(1, result.getValue(0));
+        //assertEquals(1, result.getValue(0));
         // shouldnt it throw exception
     }
     
