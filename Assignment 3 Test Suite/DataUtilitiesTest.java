@@ -15,6 +15,7 @@ public class DataUtilitiesTest{
 	private KeyedValues values2;
     	private KeyedValues values3;
     	private KeyedValues values4;
+        private KeyedValues values5;
 	private Values2D v2dPositives;
 	private Values2D v2dNegatives;
 	private Values2D v2dZeroes;
