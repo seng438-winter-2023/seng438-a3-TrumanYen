@@ -31,6 +31,8 @@ public class DataUtilitiesTest{
         values1 = mockingContext.mock(KeyedValues.class, "values1");
         values2 = mockingContext.mock(KeyedValues.class, "values2");
         values3 = mockingContext.mock(KeyedValues.class, "values3");
+	values4 = mockingContext.mock(KeyedValues.class, "values4");
+        values5 = mockingContext.mock(KeyedValues.class, "values5");
         
         v2dPositives = mockingContext.mock(Values2D.class, "v2dPositives");
         v2dNegatives = mockingContext.mock(Values2D.class, "v2dNegatives");
@@ -189,6 +191,27 @@ public class DataUtilitiesTest{
                 allowing(values3).getKey(0);
                 will(returnValue(3.7666));
                 
+		allowing(values4).getItemCount();
+                will(returnValue(2));
+                allowing(values4).getValue(0);
+                will(returnValue(1));
+                allowing(values4).getValue(1);
+                will(returnValue(null));
+                allowing(values4).getKey(0);
+                will(returnValue("A"));
+                allowing(values4).getKey(1);
+                will(returnValue("B"));
+                
+                allowing(values5).getItemCount();
+                will(returnValue(-1));
+                allowing(values5).getValue(0);
+                will(returnValue(1));
+                allowing(values5).getValue(1);
+                will(returnValue(2)); 
+                allowing(values5).getKey(0);
+                will(returnValue("A"));
+                allowing(values5).getKey(0);
+                will(returnValue("B"));
                                 
                 
             }
@@ -220,6 +243,21 @@ public class DataUtilitiesTest{
         KeyedValues result = DataUtilities.getCumulativePercentages(values3);
         //assertEquals(1, result.getValue(0));
         // shouldnt it throw exception
+    }
+
+    @Test
+    public void testGetCumalitivePercentagesReturnsCorrectValueAtIndexOneForStringKeys() {                      
+       
+        KeyedValues result = DataUtilities.getCumulativePercentages(values4);                           
+        assertEquals(1.0, result.getValue(1));      
+    }
+    
+    // In order to get 100% line coverage I had to introduce this test, however, it seems to not work as expected
+    @Test
+    public void testGetCumalitivePercentagesBranchWhenItemCountLessThen0ReturnsCorrectValue() {                      
+       
+        KeyedValues result = DataUtilities.getCumulativePercentages(values5);                           
+        assertEquals(1.0, result.getValue(1));      
     }
     
     @Test
