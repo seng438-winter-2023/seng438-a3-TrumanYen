@@ -6,12 +6,15 @@ import org.junit.*;
 import org.jmock.*;
 import static org.hamcrest.Matchers.*;
 
+
 public class DataUtilitiesTest{
+
+	// all the values that we will need for DataUtilitiesTest
 	
 	private KeyedValues values1;
 	private KeyedValues values2;
-    private KeyedValues values3;
-    private KeyedValues values4;
+    	private KeyedValues values3;
+    	private KeyedValues values4;
 	private Values2D v2dPositives;
 	private Values2D v2dNegatives;
 	private Values2D v2dZeroes;
@@ -26,7 +29,9 @@ public class DataUtilitiesTest{
     
     @Before
     public void setUp() throws Exception {
-        // setup
+
+        // setup of mock objects that are used throughout tests
+
         Mockery mockingContext = new Mockery();
 
         values1 = mockingContext.mock(KeyedValues.class, "values1");
@@ -45,9 +50,7 @@ public class DataUtilitiesTest{
         Integer[][] arr2 = { { -1, -2 }, { -3, -4 } };
         Double[][] arr3 = { { 0.1, 0.2 }, { 0.3, 0.4 } };
 
-        // ECT - keyed value is a double, int and string?
-        // try negatives, null and positives for all ECT's
-
+	
         mockingContext.checking(new Expectations() {
             {
                 //Initializing Value2D mocks
@@ -163,7 +166,7 @@ public class DataUtilitiesTest{
                 allowing(v2dEmpty).getValue(with(any(int.class)), with(any(int.class)));
                 will(throwException(new IndexOutOfBoundsException()));
 
-                // Trying to initialize a KeyedValues object using getters             
+                // initialize KeyedValues object using getters             
                 allowing(values1).getItemCount();
                 will(returnValue(2));
                 allowing(values1).getValue(1);
@@ -199,21 +202,24 @@ public class DataUtilitiesTest{
             }
         });
     }
-    
+
+	
+    // This test covers Null values for Cumalitive percentage method in data Utilities
     @Test
     public void testNullCumalitive() {
         KeyedValues result = DataUtilities.getCumulativePercentages(values4);
         assertEquals(0, result.getValue(0));
     }
 
-    
+    // This test covers Int values for Cumalitive percentage method in data Utilities    
     @Test
     public void testGetCumalitivePercentagesReturnsCorrectValueAtIndexZeroForIntKeys() {                      
        
         KeyedValues result = DataUtilities.getCumulativePercentages(values1);                           
         assertEquals(0.5, result.getValue(0));      
     }
-    
+
+    // This test covers Int values for Cumalitive percentage method in data Utilities
     @Test
     public void testGetCumalitivePercentagesReturnsCorrectValueAtIndexOneForIntKeys() {                      
        
@@ -226,6 +232,7 @@ public class DataUtilitiesTest{
     	KeyedValues result = DataUtilities.getCumulativePercentages(values2);                                       
     }
     
+    // This test covers Cumalitive percentage throws exception for value zero
     @Test(expected = Exception.class)
     public void testGetCumalitivePercentagesThrowsExceptionForValueZero() {
         KeyedValues result = DataUtilities.getCumulativePercentages(values3);
@@ -233,6 +240,7 @@ public class DataUtilitiesTest{
         // shouldnt it throw exception
     }
     
+    // test covers creating a number array using positive doubles
     @Test
     public void createNumberArrayTestPositiveDoubles() {
         // equivalent classes:
@@ -250,6 +258,7 @@ public class DataUtilitiesTest{
         assertArrayEquals("createNumberArray fails for input of doubles", expected, result);
     }
 
+    // test covers creating a number array using negative doubles    
     @Test
     public void createNumberArrayTestNegativeDoubles() {
         // equivalent classes:
@@ -267,6 +276,7 @@ public class DataUtilitiesTest{
         assertArrayEquals("createNumberArray fails for input of negative doubles", expected, result);
     }
 
+    // test covers creating a number array with no values
     @Test
     public void createNumberArrayTestEmptyArray() {
         // equivalent classes:
@@ -281,11 +291,13 @@ public class DataUtilitiesTest{
         assertArrayEquals("createNumberArea fails for empty array", expected, result);
     }
 
+    // test covers creating a number array using null values
     @Test(expected = Exception.class)
     public void createNumberArrayTestNullValues() {
         Number[] result = DataUtilities.createNumberArray(null);
     }
 
+    // test covers creating a 2D number array using positive doubles    
     @Test
     public void create2DNumberArrayTestPositiveDoubles() {
 
@@ -305,6 +317,7 @@ public class DataUtilitiesTest{
         assertArrayEquals("createNumberArray2D fails for 2d double array", expected, result);
     }
     
+    // test covers creating a 2D number array using negative doubles 
     @Test
     public void create2DNumberArrayTestNegativeDoubles() {
 
@@ -324,6 +337,7 @@ public class DataUtilitiesTest{
         assertArrayEquals("createNumberArray2D fails for 2d negative double array", expected, result);
     }
 
+    // test covers creating a 2D number array using positive doubles 
     @Test
     public void create2DNumberArrayTestEmptyArray() {
 
