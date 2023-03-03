@@ -433,6 +433,78 @@ public class DataUtilitiesTest{
     public void test_columnTotal_emptyValues() {
     	DataUtilities.calculateColumnTotal(v2dEmpty, 0);	
     }
+    @Test
+    public void test_columnTotal_positiveSum_allValidRows() {
+    	double expected = 4;
+    	String msg = "Expect return 4";
+    	int[] validRows = {0,1};
+    	double actual = DataUtilities.calculateColumnTotal(v2dPositives, 0, validRows);
+    	
+    	assertEquals(msg,expected, actual, .000000001d);
+    }
+    @Test
+    public void test_columnTotal_positiveSum_someValidRows() {
+    	double expected = 2;
+    	String msg = "Expect return 2";
+    	int[] validRows = {1};
+    	double actual = DataUtilities.calculateColumnTotal(v2dPositives, 0, validRows);
+    	
+    	assertEquals(msg,expected, actual, .000000001d);
+    }
+    @Test
+    public void test_columnTotal_positiveSum_noValidRows() {
+    	double expected = 0;
+    	String msg = "Expect return 0";
+    	int[] validRows = {};
+    	double actual = DataUtilities.calculateColumnTotal(v2dPositives, 0, validRows);
+    	
+    	assertEquals(msg,expected, actual, .000000001d);
+    }
+    @Test
+    public void test_columnTotal_positiveSum_invalidRows() {
+    	double expected = 4;
+    	String msg = "Expect return 4";
+    	int[] validRows = {0,1,3};
+    	double actual = DataUtilities.calculateColumnTotal(v2dPositives, 0, validRows);
+    	
+    	assertEquals(msg,expected, actual, .000000001d);
+    }
+    @Test
+    public void test_rowTotal_positiveSum_allValidCols() {
+    	double expected = 3;
+    	String msg = "Expect return 3";
+    	int[] validCols = {0,1};
+    	double actual = DataUtilities.calculateRowTotal(v2dPositives, 0, validCols);
+    	
+    	assertEquals(msg,expected, actual, .000000001d);
+    }
+    @Test
+    public void test_rowTotal_positiveSum_someValidCols() {
+    	double expected = 2;
+    	String msg = "Expect return 2";
+    	int[] validCols = {1};
+    	double actual = DataUtilities.calculateRowTotal(v2dPositives, 0, validCols);
+    	
+    	assertEquals(msg,expected, actual, .000000001d);
+    }
+    @Test
+    public void test_rowTotal_positiveSum_noValidCols() {
+    	double expected = 0;
+    	String msg = "Expect return 0";
+    	int[] validCols = {};
+    	double actual = DataUtilities.calculateRowTotal(v2dPositives, 0, validCols);
+    	
+    	assertEquals(msg,expected, actual, .000000001d);
+    }
+    @Test
+    public void test_rowTotal_positiveSum_invalidCols() {
+    	double expected = 3;
+    	String msg = "Expect return 3";
+    	int[] validCols = {0,1,3};
+    	double actual = DataUtilities.calculateRowTotal(v2dPositives, 0, validCols);
+    	
+    	assertEquals(msg,expected, actual, .000000001d);
+    }
     /*
     test_rowTotal_indexOutofBounds()
     test_rowTotal_indexNegative()
