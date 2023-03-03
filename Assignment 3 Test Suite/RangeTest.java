@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+// all the values for tests in the range test class
 public class RangeTest {
     private Range exampleRangeOne;
     private Range exampleRangeTwo;
@@ -19,7 +20,7 @@ public class RangeTest {
     @BeforeClass public static void setUpBeforeClass() throws Exception {
     }
 
-
+    // setup ranges for tests
     @Before
     public void setUp() throws Exception { 
     	exampleRangeOne = new Range(-10, 10);
@@ -30,7 +31,7 @@ public class RangeTest {
 		classTwoRange = new Range(5, 5);
     }
     
-
+    // testing test_negLower_negUpper_lowerEqualUpper throws exception
     @Test
     public void test_negLower_negUpper_lowerEqualUpper() throws Exception{
     	double lower = -20;
@@ -41,25 +42,33 @@ public class RangeTest {
     	assertEquals("The upper bound should be "+upper,
     	        upper, testRange.getLowerBound(), .000000001d);
     }
+    
+    // throws exception for test_negLower_negUpper_lowerGreaterUpper
     @Test(expected = Exception.class)
     public void test_negLower_negUpper_lowerGreaterUpper() {
     	double lower = -10;
     	double upper = -20;
     	Range testRange = new Range(lower,upper);
     }
+
+    // throws exception for test_zeroLower_negUpper
     @Test(expected = Exception.class)
     public void test_zeroLower_negUpper() {
     	double lower = 0;
     	double upper = -20;
     	Range testRange = new Range(lower,upper);
     }
+
+
+    // throws exception for test_posLower_negUpper    
     @Test(expected = Exception.class)
     public void test_posLower_negUpper() {
     	double lower = 20;
     	double upper = -20;
     	Range testRange = new Range(lower,upper);
     }
-    
+
+    // throws exception for test_negLower_zeroUpper
     @Test
     public void test_negLower_zeroUpper() throws Exception{
     	double lower = -20;
@@ -70,6 +79,8 @@ public class RangeTest {
     	assertEquals("The upper bound should be "+upper,
     	        upper, testRange.getLowerBound(), .000000001d);
     }
+
+    // throws exception for test_zeroLower_zeroUpper
     @Test
     public void test_zeroLower_zeroUpper() throws Exception{
     	double lower = 0;
@@ -80,6 +91,8 @@ public class RangeTest {
     	assertEquals("The upper bound should be "+upper,
     	        upper, testRange.getLowerBound(), .000000001d);
     }
+
+    // throws exception for test_posLower_zeroUpper
     @Test(expected = Exception.class)
     public void test_posLower_zeroUpper() {
     	double lower = 20;
